@@ -1,0 +1,63 @@
+<% var FAVICON_HREF = htmlWebpackPlugin.options.FAVICON_HREF; %>
+<% var IDX_SELECTORS = htmlWebpackPlugin.options.IDX_SELECTORS; %>
+<% var PKG_JSON = htmlWebpackPlugin.options.PKG_JSON; %>
+<% var TEMPLATE_CONTENT = htmlWebpackPlugin.options.TEMPLATE_CONTENT; %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="application-name" content="<%= PKG_JSON.name %>">
+    <meta name="description" content="<%= PKG_JSON.description %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-navbutton-color" content="#000">
+    <meta name="theme-color" content="#000">
+
+    <title><%= PKG_JSON.name %></title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= FAVICON_HREF %>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= FAVICON_HREF %>">
+    <link rel="apple-touch-icon" href="<%= FAVICON_HREF %>">
+    <link rel="shortcut icon" href="<%= FAVICON_HREF %>">
+
+    <link rel="modulepreload" href="<%= htmlWebpackPlugin.files.chunks.extractor.entry %>">
+
+<% [...htmlWebpackPlugin.files.css].forEach((chunk) => { %>
+    <link href="<%= chunk %>" rel="stylesheet">
+<% }); %>
+
+</head>
+    <body>
+        <div class="app">
+            <header>
+                <h1 class="app-name">
+                    <a class="link" href=""><%= PKG_JSON.name %></a>
+                </h1>
+            </header>
+
+            <main class="main">
+                <form id="<%= IDX_SELECTORS.form %>" class="form">
+                    <label class="form__label">
+                        <a class="link signage">&gt;&gt;&gt; video/mp4 &lt;&lt;&lt;</a>
+                        <input id="<%= IDX_SELECTORS.input %>" name="<%= IDX_SELECTORS.input %>" class="form__input" aria-controls="<%= IDX_SELECTORS.ul %>" type="file" accept="video/mp4" multiple>
+                    </label>
+                    <noscript>noscript... ¯\_(ツ)_/¯</noscript>
+
+                    <output for="<%= IDX_SELECTORS.input %>" class="form__output">
+                        <ul id="<%= IDX_SELECTORS.ul %>" class="output__ul" role="list"></ul>
+                    </output>
+                </form>
+            </main>
+
+            <footer></footer>
+        </div>
+
+        <template id="<%= IDX_SELECTORS.template %>"><%= TEMPLATE_CONTENT %></template>
+
+        <script nomodule>console.error('UnsupportedBrowser');</script>
+
+        <script src="<%= htmlWebpackPlugin.files.chunks.index.entry %>" type="module"></script>
+    </body>
+</html>

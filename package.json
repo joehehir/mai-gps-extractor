@@ -1,0 +1,38 @@
+{
+  "name": "mai-gps-extractor",
+  "version": "0.0.1",
+  "description": "Extract 70mai Dash Cam Pro GPS data as subtitles.",
+  "scripts": {
+    "build": "webpack --config ./scripts/webpack.config.prod.js && ./scripts/inline-contenthash.sh",
+    "dev": "webpack-dev-server --config ./scripts/webpack.config.dev.js"
+  },
+  "homepage": "https://joehehir.com/mai",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/joehehir/mai-gps-extractor.git"
+  },
+  "author": {
+    "name": "Joe Hehir",
+    "email": "hello@joehehir.com",
+    "url": "https://joehehir.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "css-loader": "^3.6.0",
+    "eslint": "^7.4.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.22.0",
+    "hash-sum": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "less": "^3.11.3",
+    "less-loader": "^6.2.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "style-loader": "^1.2.1",
+    "terser-webpack-plugin": "^3.0.6",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

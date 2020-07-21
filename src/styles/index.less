@@ -1,0 +1,189 @@
+@import "./signage.less";
+
+:root {
+    --touch-target-size: 48px;
+
+    --spacing: calc(var(--touch-target-size) / 2);
+
+    --accent-900: #DB488B;
+    --accent-700: #D854C2;
+    --accent-100: #FFF0F7;
+    --accent-100--20: fade(#FFF0F7, 20%);
+
+    --base-900: #000033;
+    --base-800: #1A0E3E;
+    --base-700: #1F1A70;
+    --base-500: #3337C0;
+
+    --text-shadow-spread: 0 0 0.5em;
+
+    --link-interation-filter--hover: drop-shadow(0 0 0 var(--accent-100)) brightness(1);
+    --link-interation-filter--active: drop-shadow(0 0 0 var(--accent-100)) brightness(1.2);
+
+    --transition-duration: 560ms; // ref: srt.svg { --transition-duration }
+    --transition-duration-interaction: 140ms;
+}
+
+html {
+    box-sizing: border-box;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-text-size-adjust: 100%;
+
+    background-color: var(--base-800);
+    // background-image: linear-gradient(to top , var(--base-800), #000);
+}
+
+body {
+    // normalise
+    box-sizing: inherit;
+    line-height: 1.15;
+    padding: 0;
+    margin: 0;
+
+    background-color: var(--base-800);
+    background:
+        radial-gradient(
+            circle at bottom,
+            var(--base-800) 40%,
+            var(--base-800), #000 90%
+        );
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        Segoe UI,
+        Helvetica,
+        Arial,
+        sans-serif,
+        Apple Color Emoji,
+        Segoe UI Emoji;
+
+    * { // reset
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.link,
+.name,
+.app-name {
+    font-style: italic;
+    
+    // text selection
+    &::selection { background: var(--accent-100--20) }
+    &::-moz-selection { background: var(--accent-100--20) }
+}
+
+.app-name {
+    margin: var(--spacing);
+    text-shadow: var(--text-shadow-spread) var(--accent-100);
+    color: var(--accent-100);
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+.link {
+    color: unset;
+    cursor: pointer;
+    text-decoration: none;
+    transition: filter var(--transition-duration-interaction) ease;
+
+    &:hover { filter: var(--link-interation-filter--hover) }
+    &:active { filter: var(--link-interation-filter--active) }
+}
+
+.main { padding: var(--spacing) }
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 640px; // arbitrary
+    margin: auto;
+    padding: var(--spacing);
+    background-color: var(--base-900);
+    color: var(--accent-100);
+    text-shadow: var(--text-shadow-spread) var(--accent-100);
+    border: 1px solid var(--accent-100);
+    border-radius: 5px;
+
+    &__label {
+        position: relative;
+        display: inline-flex;
+        text-align: center;
+        white-space: nowrap;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    &__input {
+        position: absolute;
+
+        // maintain accessibility
+        opacity: 0.0001;
+        width: 0;
+    }
+
+    &__output { width: 100% }
+}
+
+.output {
+    &__ul {
+        // reset
+        list-style-type: none;
+        text-indent: 0;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__li {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: 1em;
+    }
+}
+
+.name {
+    white-space: nowrap;
+    color: var(--accent-700);
+    text-shadow: var(--text-shadow-spread) var(--accent-700);
+    font-size: 0.8em;
+}
+
+.indicator { width: var(--touch-target-size) }
+
+.link[download] { // initial disable
+    pointer-events: none;
+    transition: none;
+
+    &:hover { filter: none }
+    &:active { filter: none }
+
+    &[href] { // enable
+        pointer-events: all;
+
+        .indicator {
+            animation: var(--transition-duration) ease var(--transition-duration) indicate;
+            transition: filter var(--transition-duration-interaction) ease;
+        }
+
+        .indicator:hover { filter: var(--link-interation-filter--hover) }
+        .indicator:active { filter: var(--link-interation-filter--active) }
+    }
+}
+
+@keyframes indicate {
+    0% { filter: none }
+    30% { filter: drop-shadow(0 0 1px var(--accent-100)) }
+    100% { filter: none }
+}

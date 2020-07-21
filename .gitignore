@@ -1,0 +1,9 @@
+.DS_Store
+logs
+*.log
+npm-debug.log*
+.npm
+.env
+node_modules/
+mkcert/
+dist/

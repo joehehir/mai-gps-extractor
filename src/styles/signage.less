@@ -1,0 +1,16 @@
+.link.signage {
+    padding: 1ch;
+    clip-path: inset(0 4ch 0 4ch);
+    animation: 600ms ease 600ms 3 alternate forwards signage;
+}
+
+@keyframes signage { // ~150ms/character
+    0% { clip-path: inset(0 4ch 0 4ch) }
+    24.95% { clip-path: inset(0 4ch 0 4ch) }
+    25.05% { clip-path: inset(0 3ch 0 3ch) }
+    49.95% { clip-path: inset(0 3ch 0 3ch) }
+    50.05% { clip-path: inset(0 2ch 0 2ch) }
+    74.95% { clip-path: inset(0 2ch 0 2ch) }
+    75.05% { clip-path: inset(0 1ch 0 1ch) }
+    100% { clip-path: inset(0 0 0 0) }
+}
