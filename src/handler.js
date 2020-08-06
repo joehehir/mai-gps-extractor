@@ -1,7 +1,7 @@
 import expected from './expected';
 import FileObject from './FileObject';
 
-export default async (args) => {
+export default (args) => {
     // validate arguments
     if (!expected(args)) return;
 
